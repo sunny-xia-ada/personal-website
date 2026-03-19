@@ -1,0 +1,309 @@
+
+<!doctype html>
+<html lang="zh-CN" class="mode-core">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Yidan Xia — Applied Scientist | AI • Emotion • Aesthetic</title>
+    <style>
+      :root {
+        /* Core Mode (Default): Professional, Focused */
+        --bg-color: #ffffff;
+        --text-main: #1d1d1f;
+        --text-muted: #86868b;
+        --accent-color: #000000;
+        --accent-hover: #333333;
+        --card-bg: #f5f5f7;
+        --card-border: rgba(127, 127, 127, 0.15);
+        --glow-color: rgba(0, 0, 0, 0.1);
+        --font-main: system-ui, -apple-system, sans-serif;
+        --transition-speed: 0.4s;
+      }
+
+      /* ✅ 全新调配的 Dance Mode: Sweet & Cool, Y2K / K-pop Idol Vibe */
+      .mode-dance {
+        --bg-color: #0d0e15; /* 深邃的暗夜蓝灰底色，高级且冷峻 */
+        --text-main: #f0f0f5; /* 清晰的亮白文字 */
+        --text-muted: #a1a1aa; /* 柔和的银灰辅助色 */
+        --accent-color: #ff2a85; /* 高饱和度的亮粉色 (Hot Pink)，呼应你的发色 */
+        --accent-hover: #ff5e9f; /* 稍亮的粉色，用于悬停效果 */
+        --card-bg: #161824; /* 略浅于底色的卡片背景，增加层次感 */
+        --card-border: rgba(255, 42, 133, 0.25); /* 粉色微光边框 */
+        --glow-color: rgba(255, 42, 133, 0.4); /* 明显的粉色霓虹光晕 */
+      }
+
+      /* Play Mode: Playful, Light American Sweet Girl */
+      .mode-play {
+        --bg-color: #fff9fc;
+        --text-main: #2a001a;
+        --text-muted: #8c6e7e;
+        --accent-color: #ffb6c1; /* 甜美柔和的粉色 */
+        --accent-hover: #ff99aa;
+        --card-bg: #fff0f5;
+        --card-border: rgba(255, 182, 193, 0.3);
+        --glow-color: rgba(255, 182, 193, 0.3);
+      }
+
+      body {
+        font-family: var(--font-main);
+        background-color: var(--bg-color);
+        color: var(--text-main);
+        line-height: 1.6;
+        margin: 0;
+        transition: background-color var(--transition-speed), color var(--transition-speed);
+      }
+
+      a { text-decoration: none; color: inherit; transition: color 0.2s; }
+      a:hover { color: var(--accent-color); }
+      ul { list-style: none; padding: 0; margin: 0; }
+
+      main { max-width: 1020px; margin: 0 auto; padding: 0 20px; }
+
+      /* Global Components */
+      .section-title { font-size: 36px; font-weight: 800; margin: 60px 0 30px; letter-spacing: -0.5px; }
+      .tag { display: inline-block; padding: 4px 12px; border-radius: 20px; background-color: var(--card-bg); color: var(--text-muted); font-size: 13px; font-weight: 500; border: 1px solid var(--card-border); }
+      .card { background-color: var(--card-bg); border-radius: 16px; border: 1px solid var(--card-border); padding: 24px; transition: box-shadow 0.3s, transform 0.3s; }
+      .card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px var(--glow-color); }
+
+      /* 1. Header & Hero */
+      header { padding: 20px 0; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--bg-color); z-index: 100; }
+      .logo { font-size: 18px; font-weight: 700; letter-spacing: 1px; }
+      nav ul { display: flex; gap: 24px; font-size: 14px; font-weight: 500; }
+
+      #hero { padding: 100px 0; display: flex; gap: 40px; align-items: center; }
+      .avatar-area { flex-shrink: 0; position: relative; }
+      
+      /* 225px 大头像设定 */
+      .avatar-circle { width: 225px; height: 225px; border-radius: 50%; background: #ccc; overflow: hidden; border: 5px solid var(--accent-color); box-shadow: 0 0 20px var(--glow-color); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 60px; color: #fff; transition: border-color var(--transition-speed), box-shadow var(--transition-speed); }
+      
+      /* 状态圆点 */
+      .status-dot { width: 18px; height: 18px; background-color: #28a745; border-radius: 50%; border: 4px solid var(--bg-color); position: absolute; bottom: 12px; right: 12px; transition: border-color var(--transition-speed); }
+
+      .hero-content { flex-grow: 1; }
+      .hero-tags { display: flex; gap: 10px; margin-bottom: 20px; }
+      .hero-name { font-size: 48px; font-weight: 800; margin: 0 0 16px; letter-spacing: -1px; }
+      .hero-intro { font-size: 18px; color: var(--text-muted); margin: 0 0 30px; max-width: 600px; }
+      .hero-buttons { display: flex; gap: 16px; }
+      .btn { display: inline-block; padding: 12px 24px; border-radius: 25px; font-size: 15px; font-weight: 600; text-align: center; transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
+      .btn-primary { background-color: var(--accent-color); color: var(--bg-color); border: 2px solid var(--accent-color); }
+      .btn-primary:hover { background-color: var(--accent-hover); border-color: var(--accent-hover); }
+      .btn-secondary { background-color: transparent; border: 2px solid var(--accent-color); color: var(--accent-color); }
+      .btn-secondary:hover { background-color: var(--card-bg); }
+
+      /* Emotion Mode Toggler */
+      .mode-section { display: flex; gap: 10px; border: 1px solid var(--card-border); padding: 5px; border-radius: 30px; background-color: var(--card-bg); margin-left: 20px;}
+      .mode-btn { padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; color: var(--text-muted); border: none; background: transparent; transition: background 0.2s, color 0.2s; }
+      .mode-btn.active { background-color: var(--accent-color); color: var(--bg-color); }
+
+      /* 2. Philosophy */
+      #philosophy .core-formula { text-align: center; font-size: 20px; font-weight: 700; color: var(--accent-color); margin: 40px 0; background-color: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--card-border); transition: color var(--transition-speed), background-color var(--transition-speed), border-color var(--transition-speed); }
+      #philosophy .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
+
+      /* 3. Tools & Trends (Agents) */
+      #agents .agent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+      .agent-icon { font-size: 24px; margin-bottom: 12px; color: var(--accent-color); transition: color var(--transition-speed); }
+      .agent-title { font-weight: 700; margin-bottom: 8px; }
+
+      /* 4. Projects */
+      #projects .project-stack { display: flex; flex-direction: column; gap: 16px; }
+      .project-role-line { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; font-size: 14px; margin-bottom: 10px; color: var(--text-muted); }
+      .project-title { font-weight: 700; margin-bottom: 12px; }
+      .impact { color: var(--accent-color); font-weight: 700; transition: color var(--transition-speed); }
+
+      /* 5. Interests & Lifestyle */
+      #lifestyle .interest-tags { display: flex; flex-wrap: wrap; gap: 12px; font-size: 16px; font-weight: 600; }
+      #lifestyle .interest-item { display: flex; align-items: center; gap: 8px; border: 1px solid var(--card-border); padding: 10px 18px; border-radius: 25px; background: var(--bg-color); transition: border-color 0.2s, background-color var(--transition-speed);}
+      #lifestyle .interest-item:hover { border-color: var(--accent-color);}
+
+      footer { border-top: 1px solid var(--card-border); padding: 40px 0; margin-top: 80px; text-align: center; color: var(--text-muted); font-size: 14px; transition: border-color var(--transition-speed); }
+
+      @media (max-width: 768px) {
+        header { flex-direction: column; gap: 10px; }
+        nav ul { flex-wrap: wrap; justify-content: center; }
+        #hero { flex-direction: column-reverse; text-align: center; padding: 60px 0; }
+        #philosophy .content-grid, #agents .agent-grid { grid-template-columns: 1fr; }
+        .hero-buttons { justify-content: center; flex-wrap: wrap; }
+        
+        /* 移动端头像大小自动适配 */
+        .avatar-circle { width: 180px; height: 180px; }
+        .status-dot { bottom: 8px; right: 8px; }
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <header>
+        <div class="logo">✨ YIDAN.XIA</div>
+        <nav>
+          <ul>
+            <li><a href="#hero">首页</a></li>
+            <li><a href="#philosophy">价值</a></li>
+            <li><a href="#agents">Agents</a></li>
+            <li><a href="#projects">项目</a></li>
+            <li><a href="#lifestyle">日常</a></li>
+          </ul>
+        </nav>
+        <div class="mode-section">
+            <button class="mode-btn active" onclick="setMode('core')">🧘 Core</button>
+            <button class="mode-btn" onclick="setMode('dance')">💃 Dance</button>
+            <button class="mode-btn" onclick="setMode('play')">🎈 Play</button>
+        </div>
+      </header>
+
+      <section id="hero">
+        <div class="hero-content">
+          <div class="hero-tags">
+            <span class="tag">Applied Scientist</span>
+            <span class="tag">AI Explorer</span>
+            <span class="tag">Dancer</span>
+            <span class="tag">Aesthetic Blogger</span>
+          </div>
+          <h1 class="hero-name">Yidan Xia</h1>
+          <p class="hero-intro">
+            Blending 10+ years of hard tech in causal inference and forecasting (Nordstrom/FedEx) 
+            with a passion for building AI tools that feel alive, expressive, and beautiful. 
+            Merging technology with warmth and deep aesthetic value.
+          </p>
+          <div class="hero-buttons">
+            <a href="https://github.com/sunny-xia-ada" class="btn btn-primary" target="_blank">View GitHub</a>
+            <a href="#" class="btn btn-secondary">Chat with Digital Twin (Online)🟢</a>
+          </div>
+        </div>
+        
+        <div class="avatar-area">
+          <div class="avatar-circle">
+            <img src="./assets/profile-photo.jpg" alt="Yidan Xia" style="width:100%; height:100%; object-fit:cover;">
+          </div>
+          <div class="status-dot"></div>
+        </div>
+
+      </section>
+
+      <section id="philosophy">
+        <h2 class="section-title">My Philosophy</h2>
+        <p class="muted" style="text-align:center;">
+          大多数 AI 工具关注功能和效率，而 XYLAB 探索更有温度的技术。
+        </p>
+        <div class="core-formula">Emotion → AI → Interface</div>
+        <div class="content-grid card">
+          <div>
+            <h3>科技应该是有生命感的</h3>
+            <p>
+              数字空间应该像是一个“活系统”，它不仅仅适应你做**什么**，还适应你**感觉**如何。
+              我们不仅要构建强大的功能，更要赋予工具情感、表达欲和美学。
+            </p>
+          </div>
+          <div>
+            <h3>从 Nordstrom 验证的逻辑中降维打击</h3>
+            <p>
+              运用多年因果推断（Causal Inference）和商业增长的硬核逻辑，
+              去支撑情感界面的深度，让美学体验不只是“花瓶”，而是具有精准商业洞察的数字产品。
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="agents">
+        <h2 class="section-title">Tools & Trends: XYLAB Agent Ecosystem</h2>
+        <p class="muted" style="margin-bottom: 20px;">
+          我的 AI 工作室：不仅仅是工具的集合，而是一个不断进化的个人 AI 生态系统。
+        </p>
+        <div class="agent-grid">
+          <div class="card">
+            <div class="agent-icon">✨</div>
+            <div class="agent-title">Smart Layout Agent</div>
+            <p class="tag" style="font-size: 11px; margin-bottom: 8px;">MVP Ready</p>
+            <p>从 Markdown 到 styled HTML 的自动布局引擎。专为创作者、内容工作流和社交发布设计。</p>
+          </div>
+          <div class="card">
+            <div class="agent-icon">✈️</div>
+            <div class="agent-title">Travel Agent</div>
+            <p>旅行发现、目的地规划和行程设计助手。已应用于 2026 年迪拜 Solo Trip 的自动化规划。</p>
+          </div>
+          <div class="card">
+            <div class="agent-icon">👗</div>
+            <div class="agent-title">Resale Agent</div>
+            <p class="tag" style="font-size: 11px; margin-bottom: 8px;">Hard Tech Integration</p>
+            <p>运用因果机器学习技术（DoWhy, EconML）分析二手平台市场需求，优化定价策略和出售时机。</p>
+          </div>
+          <div class="card">
+            <div class="agent-icon">🎬</div>
+            <div class="agent-title">Video Agent</div>
+            <p>协助短视频内容的创意生成和剪辑工具，探索计算机视觉（CV）模型对舞蹈视频的比对与优化。</p>
+          </div>
+        </div>
+      </section>
+
+      <section id="projects">
+        <h2 class="section-title">Highlights: Projects</h2>
+        <div class="project-stack">
+          <div class="card">
+            <div class="project-role-line">
+              <span class="role">Data Scientist 2 (Tech Lead)</span>
+              <span class="company">| Nordstrom Inc.</span>
+            </div>
+            <div class="project-title">Bayesian Causal Discovery Models for Delivery Programs</div>
+            <p>
+              Designed models to evaluate free shipping and loyalty programs, 
+              informing leadership strategy and driving <span class="impact">$30M+</span> incremental revenue.
+            </p>
+          </div>
+          <div class="card">
+            <div class="project-role-line">
+              <span class="role">Hackathon Champion (2023)</span>
+              <span class="company">| Nordstrom Inc.</span>
+            </div>
+            <div class="project-title">Sustainability Loyalty Program Prototype</div>
+            <p>Led team to prototype and pitch a sustainability-focused loyalty program in 48 hours.</p>
+          </div>
+          <div class="card">
+            <div class="project-role-line">
+              <span class="role">Solo Founder/Architect</span>
+              <span class="company">| XYLAB</span>
+            </div>
+            <div class="project-title">XYLAB Architecture & Digital Twin Agent</div>
+            <p>
+              Built an end-to-end multi-agent workflow (Agentic Workflow) for content creation and publishing, 
+              focusing on GenAI evaluation and multi-agent collaboration (CrewAI/LangChain).
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section id="lifestyle">
+        <h2 class="section-title">Beyond the Algorithm</h2>
+        <p class="muted" style="margin-bottom: 20px;">
+          我相信“核心”的力量，不仅在身体上，也在代码里。
+        </p>
+        <div class="lifestyle-card card">
+          <div class="interest-tags">
+            <div class="interest-item"><span>💃</span> Senior Dancer: K-pop, Hip-hop, Jazz, Heels</div>
+            <div class="interest-item"><span>🧘</span> Core Training: Solidcore & Pilates Enthusiast</div>
+            <div class="interest-item"><span>🌸</span> Zanmang Loopy Collection Manager</div>
+            <div class="interest-item"><span>🎁</span>Tamburins BOTTARI Scent User</div>
+            <div class="interest-item"><span>📚</span> Avid Reader (50+ books/year)</div>
+          </div>
+        </div>
+      </section>
+
+      <footer>
+        <small>© 2026 Yidan Xia. saving as index.html and open in browser.</small>
+      </footer>
+    </main>
+    <script>
+        function setMode(modeName) {
+            const html = document.documentElement;
+            // 1. Remove old modes
+            html.className = html.className.replace(/\bmode-\S+/g, '');
+            // 2. Add new mode
+            html.classList.add('mode-' + modeName);
+
+            // 3. Update buttons state
+            const buttons = document.querySelectorAll('.mode-btn');
+            buttons.forEach(btn => btn.classList.remove('active'));
+            const activeBtn = Array.from(buttons).find(btn => btn.innerText.toLowerCase().includes(modeName));
+            if (activeBtn) activeBtn.classList.add('active');
+        }
+    </script>
+  </body>
+</html>
