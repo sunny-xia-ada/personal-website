@@ -1,4 +1,4 @@
-# XYLAB Digital Twin v5.4 🧬✨🍭
+# XYLAB Digital Twin v5.4.1 🧬✨🍭🚀
 
 [English](#english) | [中文](#中文)
 
@@ -7,7 +7,7 @@
 ## English
 
 ### 🌟 Project Overview
-**XYLAB Digital Twin v5.4** is a high-polish, interactive personal portfolio and AI ecosystem. It blends the modern **"Swagapp" Bento Box** aesthetic with a sophisticated **3-Mode Theme System**, serving as the digital representation of **Yidan Xia** — Applied Scientist (Nordstrom, FedEx Lead) and founder of XYLAB.
+**XYLAB Digital Twin v5.4.1** is a high-polish, interactive personal portfolio and AI ecosystem. This version is **fully live**, with the frontend hosted on GitHub Pages and a persistent connection to the FastAPI backend on Render.com. It blends the modern **"Swagapp" Bento Box** aesthetic with a sophisticated **3-Mode Theme System**.
 
 The site is designed to be "living software," where the interface adapts to the user's selected "emotion mode."
 
@@ -45,7 +45,7 @@ The site is designed to be "living software," where the interface adapts to the 
 ## 中文
 
 ### 🌟 项目概览
-**XYLAB Digital Twin v5.4** 是一个高审美、强交互的个人作品集与 AI 生态系统。它将现代 **"Swagapp" Bento Box (便当盒)** 美学与复杂的 **三模态皮肤系统** 相结合，是 **Yidan Xia** (Nordstrom/FedEx 资深应用科学家，XYLAB 创始人) 的数字孪生人格。
+**XYLAB Digital Twin v5.4.1** 是一个高审美、强交互的个人作品集与 AI 生态系统。该版本已**完全进入生产环境**，其前端部署于 GitHub Pages，并实时连接到部署在 Render.com 上的 FastAPI 后端。它将现代 **"Swagapp" Bento Box (便当盒)** 美学与复杂的 **三模态皮肤系统** 相结合。
 
 本项目旨在打造“有生命力”的软件，界面会根据用户选择的“情绪模式”实时演变。
 
