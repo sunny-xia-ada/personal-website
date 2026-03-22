@@ -128,6 +128,34 @@
         .avatar-circle { width: 180px; height: 180px; }
         .status-dot { bottom: 8px; right: 8px; }
       }
+
+      /* 6. Chat Widget - Sweet & Cool Glassmorphism */
+      .chat-toggle { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; box-shadow: 0 10px 30px var(--glow-color); z-index: 1000; transition: transform 0.3s; }
+      .chat-toggle:hover { transform: scale(1.1); }
+      
+      .chat-window { position: fixed; bottom: 100px; right: 30px; width: 350px; height: 500px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--card-border); border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); display: none; flex-direction: column; overflow: hidden; z-index: 1000; animation: slideUp 0.3s ease-out; }
+      @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+      
+      .chat-header { padding: 15px 20px; background: var(--accent-color); color: var(--bg-color); display: flex; justify-content: space-between; align-items: center; }
+      .chat-header h3 { margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 1px; }
+      .chat-close { cursor: pointer; opacity: 0.8; }
+      
+      .chat-body { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
+      .msg { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.4; position: relative; }
+      .msg-user { align-self: flex-end; background: var(--accent-color); color: var(--bg-color); border-bottom-right-radius: 2px; }
+      .msg-ai { align-self: flex-start; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--card-border); border-bottom-left-radius: 2px; }
+      .msg-ai.error { border-color: #ff4d4f; color: #ff4d4f; background: #fff1f0; }
+      
+      .chat-footer { padding: 15px; border-top: 1px solid var(--card-border); display: flex; gap: 10px; }
+      .chat-input { flex-grow: 1; border: 1px solid var(--card-border); border-radius: 20px; padding: 8px 15px; outline: none; background: var(--bg-color); color: var(--text-main); font-size: 14px; }
+      .chat-send { background: var(--accent-color); color: var(--bg-color); border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 12px; transition: opacity 0.2s; }
+      .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+      .loading-bubble { display: flex; gap: 4px; padding: 12px; }
+      .dot { width: 6px; height: 6px; background: var(--accent-color); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
+      .dot:nth-child(1) { animation-delay: -0.32s; }
+      .dot:nth-child(2) { animation-delay: -0.16s; }
+      @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
     </style>
   </head>
   <body>
@@ -166,7 +194,7 @@
           </p>
           <div class="hero-buttons">
             <a href="https://github.com/sunny-xia-ada" class="btn btn-primary" target="_blank">View GitHub</a>
-            <a href="#" class="btn btn-secondary">Chat with Digital Twin (Online)🟢</a>
+            <a href="#" class="btn btn-secondary" onclick="toggleChat(); return false;">Chat with Digital Twin (Online)🟢</a>
           </div>
         </div>
         
@@ -287,22 +315,100 @@
       </section>
 
       <footer>
-        <small>© 2026 Yidan Xia. saving as index.html and open in browser.</small>
+        <small>© 2026 Yidan Xia. Saving as index.html and open in browser.</small>
       </footer>
     </main>
+
+    <!-- Chat Widget HTML -->
+    <div class="chat-toggle" onclick="toggleChat()" id="chat-toggle-btn">💬</div>
+    <div class="chat-window" id="chat-window">
+        <div class="chat-header">
+            <h3>YIDAN.TWIN 🟢</h3>
+            <span class="chat-close" onclick="toggleChat()">✕</span>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <div class="msg msg-ai">Hi! I'm Yidan's Digital Twin. 🍬 Ask me anything about my work in Causal Inference, XYLAB, or even my favorite K-pop choreography!</div>
+        </div>
+        <div class="chat-footer">
+            <input type="text" id="chat-input" class="chat-input" placeholder="Type a message..." onkeypress="if(event.key === 'Enter') sendMessage()">
+            <button class="chat-send" id="chat-send" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
     <script>
+
         function setMode(modeName) {
             const html = document.documentElement;
-            // 1. Remove old modes
             html.className = html.className.replace(/\bmode-\S+/g, '');
-            // 2. Add new mode
             html.classList.add('mode-' + modeName);
-
-            // 3. Update buttons state
             const buttons = document.querySelectorAll('.mode-btn');
             buttons.forEach(btn => btn.classList.remove('active'));
             const activeBtn = Array.from(buttons).find(btn => btn.innerText.toLowerCase().includes(modeName));
             if (activeBtn) activeBtn.classList.add('active');
+        }
+
+        // Digital Twin Chat Logic
+        const chatWindow = document.getElementById('chat-window');
+        const chatBody = document.getElementById('chat-body');
+        const chatInput = document.getElementById('chat-input');
+        const chatSend = document.getElementById('chat-send');
+        const sessionId = Math.random().toString(36).substring(7);
+
+        function toggleChat() {
+            if (!chatWindow) return;
+            const isHidden = window.getComputedStyle(chatWindow).display === 'none';
+            chatWindow.style.display = isHidden ? 'flex' : 'none';
+            if (isHidden) chatInput.focus();
+        }
+
+        function appendMessage(text, className) {
+            const msg = document.createElement('div');
+            msg.className = `msg ${className}`;
+            msg.innerText = text;
+            chatBody.appendChild(msg);
+            chatBody.scrollTop = chatBody.scrollHeight;
+            return msg;
+        }
+
+        async function sendMessage() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+
+            // Append User Message
+            appendMessage(text, 'msg-user');
+            chatInput.value = '';
+            
+            // Loading State
+            chatInput.disabled = true;
+            chatSend.disabled = true;
+            const loading = document.createElement('div');
+            loading.className = 'msg msg-ai loading-bubble';
+            loading.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
+            chatBody.appendChild(loading);
+            chatBody.scrollTop = chatBody.scrollHeight;
+
+            try {
+                // 🔴 TODO: Replace this URL with your actual Render domain!
+                const response = await fetch('https://YOUR-RENDER-APP-NAME.onrender.com/api/chat', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ message: text, session_id: sessionId })
+                });
+
+                if (!response.ok) throw new Error('Server issues');
+
+                const data = await response.json();
+                chatBody.removeChild(loading);
+                appendMessage(data.reply, 'msg-ai');
+            } catch (error) {
+                console.error('Chat Error:', error);
+                chatBody.removeChild(loading);
+                const errorMsg = appendMessage("Oops! My backend seems to be taking a coffee break. Please make sure the FastAPI server is running localy.", 'msg-ai');
+                errorMsg.classList.add('error');
+            } finally {
+                chatInput.disabled = false;
+                chatSend.disabled = false;
+                chatInput.focus();
+            }
         }
     </script>
   </body>

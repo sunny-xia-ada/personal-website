@@ -1,0 +1,6 @@
+fastapi
+uvicorn
+pydantic
+tenacity
+google-genai
+python-multipart
