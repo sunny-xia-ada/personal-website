@@ -1,390 +1,785 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
 
-<!doctype html>
-<html lang="zh-CN" class="mode-core">
-  <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>Yidan Xia — Applied Scientist | AI • Emotion • Aesthetic</title>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>YIDAN XIA | AI • EMOTION • AESTHETIC</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;800&family=Space+Mono&display=swap"
+        rel="stylesheet">
     <style>
-      :root {
-        /* Core Mode (Default): Professional, Focused */
-        --bg-color: #ffffff;
-        --text-main: #1d1d1f;
-        --text-muted: #86868b;
-        --accent-color: #000000;
-        --accent-hover: #333333;
-        --card-bg: #f5f5f7;
-        --card-border: rgba(127, 127, 127, 0.15);
-        --glow-color: rgba(0, 0, 0, 0.1);
-        --font-main: system-ui, -apple-system, sans-serif;
-        --transition-speed: 0.4s;
-      }
+        :root {
+            /* 🧘 CORE MODE (DEFAULT) - 干净、极简 */
+            --bg: #f4f7f6;
+            --text-dark: #121212;
+            --text-muted: #6b7280;
+            --white: #ffffff;
+            --accent-yellow: #ffde17;
+            --accent-lavender: #d1d5ff;
+            --accent-peach: #ffdcc8;
+            --accent-pink: #ffcce6;
+            --accent-mint: #c8ffe6;
+            --border-radius-card: 40px;
+            --border-radius-pill: 50px;
+            --shadow-soft: 0 10px 40px rgba(0, 0, 0, 0.05);
+            --float-speed: 4s;
+            --float-easing: ease-in-out;
+            --card-glass: rgba(255, 255, 255, 0.4);
+            --chat-bg: rgba(255, 255, 255, 0.85);
+            --image-bg: #e9eceb;
 
-      /* ✅ 全新调配的 Dance Mode: Sweet & Cool, Y2K / K-pop Idol Vibe */
-      .mode-dance {
-        --bg-color: #0d0e15; /* 深邃的暗夜蓝灰底色，高级且冷峻 */
-        --text-main: #f0f0f5; /* 清晰的亮白文字 */
-        --text-muted: #a1a1aa; /* 柔和的银灰辅助色 */
-        --accent-color: #ff2a85; /* 高饱和度的亮粉色 (Hot Pink)，呼应你的发色 */
-        --accent-hover: #ff5e9f; /* 稍亮的粉色，用于悬停效果 */
-        --card-bg: #161824; /* 略浅于底色的卡片背景，增加层次感 */
-        --card-border: rgba(255, 42, 133, 0.25); /* 粉色微光边框 */
-        --glow-color: rgba(255, 42, 133, 0.4); /* 明显的粉色霓虹光晕 */
-      }
-
-      /* Play Mode: Playful, Light American Sweet Girl */
-      .mode-play {
-        --bg-color: #fff9fc;
-        --text-main: #2a001a;
-        --text-muted: #8c6e7e;
-        --accent-color: #ffb6c1; /* 甜美柔和的粉色 */
-        --accent-hover: #ff99aa;
-        --card-bg: #fff0f5;
-        --card-border: rgba(255, 182, 193, 0.3);
-        --glow-color: rgba(255, 182, 193, 0.3);
-      }
-
-      body {
-        font-family: var(--font-main);
-        background-color: var(--bg-color);
-        color: var(--text-main);
-        line-height: 1.6;
-        margin: 0;
-        transition: background-color var(--transition-speed), color var(--transition-speed);
-      }
-
-      a { text-decoration: none; color: inherit; transition: color 0.2s; }
-      a:hover { color: var(--accent-color); }
-      ul { list-style: none; padding: 0; margin: 0; }
-
-      main { max-width: 1020px; margin: 0 auto; padding: 0 20px; }
-
-      /* Global Components */
-      .section-title { font-size: 36px; font-weight: 800; margin: 60px 0 30px; letter-spacing: -0.5px; }
-      .tag { display: inline-block; padding: 4px 12px; border-radius: 20px; background-color: var(--card-bg); color: var(--text-muted); font-size: 13px; font-weight: 500; border: 1px solid var(--card-border); }
-      .card { background-color: var(--card-bg); border-radius: 16px; border: 1px solid var(--card-border); padding: 24px; transition: box-shadow 0.3s, transform 0.3s; }
-      .card:hover { transform: translateY(-3px); box-shadow: 0 10px 20px var(--glow-color); }
-
-      /* 1. Header & Hero */
-      header { padding: 20px 0; border-bottom: 1px solid var(--card-border); display: flex; justify-content: space-between; align-items: center; position: sticky; top: 0; background: var(--bg-color); z-index: 100; }
-      .logo { font-size: 18px; font-weight: 700; letter-spacing: 1px; }
-      nav ul { display: flex; gap: 24px; font-size: 14px; font-weight: 500; }
-
-      #hero { padding: 100px 0; display: flex; gap: 40px; align-items: center; }
-      .avatar-area { flex-shrink: 0; position: relative; }
-      
-      /* 225px 大头像设定 */
-      .avatar-circle { width: 225px; height: 225px; border-radius: 50%; background: #ccc; overflow: hidden; border: 5px solid var(--accent-color); box-shadow: 0 0 20px var(--glow-color); display: flex; align-items: center; justify-content: center; font-weight: 900; font-size: 60px; color: #fff; transition: border-color var(--transition-speed), box-shadow var(--transition-speed); }
-      
-      /* 状态圆点 */
-      .status-dot { width: 18px; height: 18px; background-color: #28a745; border-radius: 50%; border: 4px solid var(--bg-color); position: absolute; bottom: 12px; right: 12px; transition: border-color var(--transition-speed); }
-
-      .hero-content { flex-grow: 1; }
-      .hero-tags { display: flex; gap: 10px; margin-bottom: 20px; }
-      .hero-name { font-size: 48px; font-weight: 800; margin: 0 0 16px; letter-spacing: -1px; }
-      .hero-intro { font-size: 18px; color: var(--text-muted); margin: 0 0 30px; max-width: 600px; }
-      .hero-buttons { display: flex; gap: 16px; }
-      .btn { display: inline-block; padding: 12px 24px; border-radius: 25px; font-size: 15px; font-weight: 600; text-align: center; transition: background-color 0.2s, border-color 0.2s, color 0.2s; }
-      .btn-primary { background-color: var(--accent-color); color: var(--bg-color); border: 2px solid var(--accent-color); }
-      .btn-primary:hover { background-color: var(--accent-hover); border-color: var(--accent-hover); }
-      .btn-secondary { background-color: transparent; border: 2px solid var(--accent-color); color: var(--accent-color); }
-      .btn-secondary:hover { background-color: var(--card-bg); }
-
-      /* Emotion Mode Toggler */
-      .mode-section { display: flex; gap: 10px; border: 1px solid var(--card-border); padding: 5px; border-radius: 30px; background-color: var(--card-bg); margin-left: 20px;}
-      .mode-btn { padding: 6px 16px; border-radius: 20px; font-size: 12px; font-weight: 600; cursor: pointer; color: var(--text-muted); border: none; background: transparent; transition: background 0.2s, color 0.2s; }
-      .mode-btn.active { background-color: var(--accent-color); color: var(--bg-color); }
-
-      /* 2. Philosophy */
-      #philosophy .core-formula { text-align: center; font-size: 20px; font-weight: 700; color: var(--accent-color); margin: 40px 0; background-color: var(--card-bg); padding: 20px; border-radius: 12px; border: 1px solid var(--card-border); transition: color var(--transition-speed), background-color var(--transition-speed), border-color var(--transition-speed); }
-      #philosophy .content-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 30px; }
-
-      /* 3. Tools & Trends (Agents) */
-      #agents .agent-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
-      .agent-icon { font-size: 24px; margin-bottom: 12px; color: var(--accent-color); transition: color var(--transition-speed); }
-      .agent-title { font-weight: 700; margin-bottom: 8px; }
-
-      /* 4. Projects */
-      #projects .project-stack { display: flex; flex-direction: column; gap: 16px; }
-      .project-role-line { display: flex; flex-wrap: wrap; gap: 8px; align-items: baseline; font-size: 14px; margin-bottom: 10px; color: var(--text-muted); }
-      .project-title { font-weight: 700; margin-bottom: 12px; }
-      .impact { color: var(--accent-color); font-weight: 700; transition: color var(--transition-speed); }
-
-      /* 5. Interests & Lifestyle */
-      #lifestyle .interest-tags { display: flex; flex-wrap: wrap; gap: 12px; font-size: 16px; font-weight: 600; }
-      #lifestyle .interest-item { display: flex; align-items: center; gap: 8px; border: 1px solid var(--card-border); padding: 10px 18px; border-radius: 25px; background: var(--bg-color); transition: border-color 0.2s, background-color var(--transition-speed);}
-      #lifestyle .interest-item:hover { border-color: var(--accent-color);}
-
-      footer { border-top: 1px solid var(--card-border); padding: 40px 0; margin-top: 80px; text-align: center; color: var(--text-muted); font-size: 14px; transition: border-color var(--transition-speed); }
-
-      @media (max-width: 768px) {
-        header { flex-direction: column; gap: 10px; }
-        nav ul { flex-wrap: wrap; justify-content: center; }
-        #hero { flex-direction: column-reverse; text-align: center; padding: 60px 0; }
-        #philosophy .content-grid, #agents .agent-grid { grid-template-columns: 1fr; }
-        .hero-buttons { justify-content: center; flex-wrap: wrap; }
-        
-        /* 移动端头像大小自动适配 */
-        .avatar-circle { width: 180px; height: 180px; }
-        .status-dot { bottom: 8px; right: 8px; }
-      }
-
-      /* 6. Chat Widget - Sweet & Cool Glassmorphism */
-      .chat-toggle { position: fixed; bottom: 30px; right: 30px; width: 60px; height: 60px; background-color: var(--accent-color); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 24px; cursor: pointer; box-shadow: 0 10px 30px var(--glow-color); z-index: 1000; transition: transform 0.3s; }
-      .chat-toggle:hover { transform: scale(1.1); }
-      
-      .chat-window { position: fixed; bottom: 100px; right: 30px; width: 350px; height: 500px; background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px); border: 1px solid var(--card-border); border-radius: 20px; box-shadow: 0 20px 50px rgba(0,0,0,0.1); display: none; flex-direction: column; overflow: hidden; z-index: 1000; animation: slideUp 0.3s ease-out; }
-      @keyframes slideUp { from { transform: translateY(20px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
-      
-      .chat-header { padding: 15px 20px; background: var(--accent-color); color: var(--bg-color); display: flex; justify-content: space-between; align-items: center; }
-      .chat-header h3 { margin: 0; font-size: 14px; font-weight: 700; letter-spacing: 1px; }
-      .chat-close { cursor: pointer; opacity: 0.8; }
-      
-      .chat-body { flex-grow: 1; padding: 20px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
-      .msg { max-width: 80%; padding: 10px 14px; border-radius: 12px; font-size: 14px; line-height: 1.4; position: relative; }
-      .msg-user { align-self: flex-end; background: var(--accent-color); color: var(--bg-color); border-bottom-right-radius: 2px; }
-      .msg-ai { align-self: flex-start; background: var(--card-bg); color: var(--text-main); border: 1px solid var(--card-border); border-bottom-left-radius: 2px; }
-      .msg-ai.error { border-color: #ff4d4f; color: #ff4d4f; background: #fff1f0; }
-      
-      .chat-footer { padding: 15px; border-top: 1px solid var(--card-border); display: flex; gap: 10px; }
-      .chat-input { flex-grow: 1; border: 1px solid var(--card-border); border-radius: 20px; padding: 8px 15px; outline: none; background: var(--bg-color); color: var(--text-main); font-size: 14px; }
-      .chat-send { background: var(--accent-color); color: var(--bg-color); border: none; padding: 8px 16px; border-radius: 20px; cursor: pointer; font-weight: 600; font-size: 12px; transition: opacity 0.2s; }
-      .chat-send:disabled { opacity: 0.5; cursor: not-allowed; }
-
-      .loading-bubble { display: flex; gap: 4px; padding: 12px; }
-      .dot { width: 6px; height: 6px; background: var(--accent-color); border-radius: 50%; animation: bounce 1.4s infinite ease-in-out both; }
-      .dot:nth-child(1) { animation-delay: -0.32s; }
-      .dot:nth-child(2) { animation-delay: -0.16s; }
-      @keyframes bounce { 0%, 80%, 100% { transform: scale(0); } 40% { transform: scale(1.0); } }
-    </style>
-  </head>
-  <body>
-    <main>
-      <header>
-        <div class="logo">✨ YIDAN.XIA</div>
-        <nav>
-          <ul>
-            <li><a href="#hero">首页</a></li>
-            <li><a href="#philosophy">价值</a></li>
-            <li><a href="#agents">Agents</a></li>
-            <li><a href="#projects">项目</a></li>
-            <li><a href="#lifestyle">日常</a></li>
-          </ul>
-        </nav>
-        <div class="mode-section">
-            <button class="mode-btn active" onclick="setMode('core')">🧘 Core</button>
-            <button class="mode-btn" onclick="setMode('dance')">💃 Dance</button>
-            <button class="mode-btn" onclick="setMode('play')">🎈 Play</button>
-        </div>
-      </header>
-
-      <section id="hero">
-        <div class="hero-content">
-          <div class="hero-tags">
-            <span class="tag">Applied Scientist</span>
-            <span class="tag">AI Explorer</span>
-            <span class="tag">Dancer</span>
-            <span class="tag">Aesthetic Blogger</span>
-          </div>
-          <h1 class="hero-name">Yidan Xia</h1>
-          <p class="hero-intro">
-            Blending 10+ years of hard tech in causal inference and forecasting (Nordstrom/FedEx) 
-            with a passion for building AI tools that feel alive, expressive, and beautiful. 
-            Merging technology with warmth and deep aesthetic value.
-          </p>
-          <div class="hero-buttons">
-            <a href="https://github.com/sunny-xia-ada" class="btn btn-primary" target="_blank">View GitHub</a>
-            <a href="#" class="btn btn-secondary" onclick="toggleChat(); return false;">Chat with Digital Twin (Online)🟢</a>
-          </div>
-        </div>
-        
-        <div class="avatar-area">
-          <div class="avatar-circle">
-            <img src="./assets/profile-photo.jpg" alt="Yidan Xia" style="width:100%; height:100%; object-fit:cover;">
-          </div>
-          <div class="status-dot"></div>
-        </div>
-
-      </section>
-
-      <section id="philosophy">
-        <h2 class="section-title">My Philosophy</h2>
-        <p class="muted" style="text-align:center;">
-          大多数 AI 工具关注功能和效率，而 XYLAB 探索更有温度的技术。
-        </p>
-        <div class="core-formula">Emotion → AI → Interface</div>
-        <div class="content-grid card">
-          <div>
-            <h3>科技应该是有生命感的</h3>
-            <p>
-              数字空间应该像是一个“活系统”，它不仅仅适应你做**什么**，还适应你**感觉**如何。
-              我们不仅要构建强大的功能，更要赋予工具情感、表达欲和美学。
-            </p>
-          </div>
-          <div>
-            <h3>从 Nordstrom 验证的逻辑中降维打击</h3>
-            <p>
-              运用多年因果推断（Causal Inference）和商业增长的硬核逻辑，
-              去支撑情感界面的深度，让美学体验不只是“花瓶”，而是具有精准商业洞察的数字产品。
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="agents">
-        <h2 class="section-title">Tools & Trends: XYLAB Agent Ecosystem</h2>
-        <p class="muted" style="margin-bottom: 20px;">
-          我的 AI 工作室：不仅仅是工具的集合，而是一个不断进化的个人 AI 生态系统。
-        </p>
-        <div class="agent-grid">
-          <div class="card">
-            <div class="agent-icon">✨</div>
-            <div class="agent-title">Smart Layout Agent</div>
-            <p class="tag" style="font-size: 11px; margin-bottom: 8px;">MVP Ready</p>
-            <p>从 Markdown 到 styled HTML 的自动布局引擎。专为创作者、内容工作流和社交发布设计。</p>
-          </div>
-          <div class="card">
-            <div class="agent-icon">✈️</div>
-            <div class="agent-title">Travel Agent</div>
-            <p>旅行发现、目的地规划和行程设计助手。已应用于 2026 年迪拜 Solo Trip 的自动化规划。</p>
-          </div>
-          <div class="card">
-            <div class="agent-icon">👗</div>
-            <div class="agent-title">Resale Agent</div>
-            <p class="tag" style="font-size: 11px; margin-bottom: 8px;">Hard Tech Integration</p>
-            <p>运用因果机器学习技术（DoWhy, EconML）分析二手平台市场需求，优化定价策略和出售时机。</p>
-          </div>
-          <div class="card">
-            <div class="agent-icon">🎬</div>
-            <div class="agent-title">Video Agent</div>
-            <p>协助短视频内容的创意生成和剪辑工具，探索计算机视觉（CV）模型对舞蹈视频的比对与优化。</p>
-          </div>
-        </div>
-      </section>
-
-      <section id="projects">
-        <h2 class="section-title">Highlights: Projects</h2>
-        <div class="project-stack">
-          <div class="card">
-            <div class="project-role-line">
-              <span class="role">Data Scientist 2 (Tech Lead)</span>
-              <span class="company">| Nordstrom Inc.</span>
-            </div>
-            <div class="project-title">Bayesian Causal Discovery Models for Delivery Programs</div>
-            <p>
-              Designed models to evaluate free shipping and loyalty programs, 
-              informing leadership strategy and driving <span class="impact">$30M+</span> incremental revenue.
-            </p>
-          </div>
-          <div class="card">
-            <div class="project-role-line">
-              <span class="role">Hackathon Champion (2023)</span>
-              <span class="company">| Nordstrom Inc.</span>
-            </div>
-            <div class="project-title">Sustainability Loyalty Program Prototype</div>
-            <p>Led team to prototype and pitch a sustainability-focused loyalty program in 48 hours.</p>
-          </div>
-          <div class="card">
-            <div class="project-role-line">
-              <span class="role">Solo Founder/Architect</span>
-              <span class="company">| XYLAB</span>
-            </div>
-            <div class="project-title">XYLAB Architecture & Digital Twin Agent</div>
-            <p>
-              Built an end-to-end multi-agent workflow (Agentic Workflow) for content creation and publishing, 
-              focusing on GenAI evaluation and multi-agent collaboration (CrewAI/LangChain).
-            </p>
-          </div>
-        </div>
-      </section>
-
-      <section id="lifestyle">
-        <h2 class="section-title">Beyond the Algorithm</h2>
-        <p class="muted" style="margin-bottom: 20px;">
-          我相信“核心”的力量，不仅在身体上，也在代码里。
-        </p>
-        <div class="lifestyle-card card">
-          <div class="interest-tags">
-            <div class="interest-item"><span>💃</span> Senior Dancer: K-pop, Hip-hop, Jazz, Heels</div>
-            <div class="interest-item"><span>🧘</span> Core Training: Solidcore & Pilates Enthusiast</div>
-            <div class="interest-item"><span>🌸</span> Zanmang Loopy Collection Manager</div>
-            <div class="interest-item"><span>🎁</span>Tamburins BOTTARI Scent User</div>
-            <div class="interest-item"><span>📚</span> Avid Reader (50+ books/year)</div>
-          </div>
-        </div>
-      </section>
-
-      <footer>
-        <small>© 2026 Yidan Xia. Saving as index.html and open in browser.</small>
-      </footer>
-    </main>
-
-    <!-- Chat Widget HTML -->
-    <div class="chat-toggle" onclick="toggleChat()" id="chat-toggle-btn">💬</div>
-    <div class="chat-window" id="chat-window">
-        <div class="chat-header">
-            <h3>YIDAN.TWIN 🟢</h3>
-            <span class="chat-close" onclick="toggleChat()">✕</span>
-        </div>
-        <div class="chat-body" id="chat-body">
-            <div class="msg msg-ai">Hi! I'm Yidan's Digital Twin. 🍬 Ask me anything about my work in Causal Inference, XYLAB, or even my favorite K-pop choreography!</div>
-        </div>
-        <div class="chat-footer">
-            <input type="text" id="chat-input" class="chat-input" placeholder="Type a message..." onkeypress="if(event.key === 'Enter') sendMessage()">
-            <button class="chat-send" id="chat-send" onclick="sendMessage()">Send</button>
-        </div>
-    </div>
-    <script>
-
-        function setMode(modeName) {
-            const html = document.documentElement;
-            html.className = html.className.replace(/\bmode-\S+/g, '');
-            html.classList.add('mode-' + modeName);
-            const buttons = document.querySelectorAll('.mode-btn');
-            buttons.forEach(btn => btn.classList.remove('active'));
-            const activeBtn = Array.from(buttons).find(btn => btn.innerText.toLowerCase().includes(modeName));
-            if (activeBtn) activeBtn.classList.add('active');
+            /* 背景图控制变量 */
+            --bg-img: none;
+            --bg-opacity: 0;
+            --bg-size: cover;
+            --bg-repeat: no-repeat;
         }
 
-        // Digital Twin Chat Logic
+        /* 💃 DANCE MODE: 赛博朋克 + 舞者线条底纹 */
+        .mode-dance {
+            --bg: #09090b;
+            --text-dark: #ffffff;
+            --text-muted: #a1a1aa;
+            --white: #27272a;
+            --accent-yellow: #ff1493;
+            --accent-lavender: #8a2be2;
+            --accent-peach: #ff00ff;
+            --accent-pink: #ff1493;
+            --accent-mint: #00bfff;
+            --float-speed: 2s;
+            --card-glass: rgba(0, 0, 0, 0.4);
+            --chat-bg: rgba(39, 39, 42, 0.9);
+            --shadow-soft: 0 10px 40px rgba(255, 20, 147, 0.2);
+            --image-bg: #27272a;
+
+            /* 👇 舞者背景图设置 */
+            --bg-img: url('./assets/dancer.png');
+            /* 你的舞者线条图路径 */
+            --bg-opacity: 0.2;
+            /* 透明度：15%，若隐若现不抢戏 */
+            --bg-size: cover;
+            /* 铺满整个屏幕 */
+            --bg-repeat: no-repeat;
+        }
+
+        /* 🎈 PLAY MODE: 梦幻果冻风 + Loopy 平铺/居中水印 */
+        .mode-play {
+            --bg: #f0e6ff;
+            --text-dark: #2d1b4e;
+            --text-muted: #7c6a9e;
+            --white: rgba(255, 255, 255, 0.8);
+            --accent-yellow: #ffeb3b;
+            --accent-lavender: #b39ddb;
+            --accent-peach: #ffab91;
+            --accent-pink: #f48fb1;
+            --accent-mint: #80cbc4;
+            --card-glass: rgba(255, 255, 255, 0.4);
+            --float-easing: cubic-bezier(0.68, -0.55, 0.265, 1.55);
+            --image-bg: rgba(255, 255, 255, 0.5);
+
+            /* 👇 Loopy 背景图设置 */
+            --bg-img: url('./assets/loopy.png');
+            /* 你的 Loopy 图路径 */
+            --bg-opacity: 0.2;
+            /* 透明度：8%，很淡的可爱水印感 */
+            --bg-size: 250px;
+            /* 控制 Loopy 图案的大小 */
+            --bg-repeat: repeat;
+            /* 平铺整个背景！(如果你想只显示一个巨大的居中 Loopy，改成 no-repeat 并且把上面的 size 改成 50% 左右) */
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, sans-serif;
+            background-color: var(--bg);
+            color: var(--text-dark);
+            line-height: 1.5;
+            transition: background-color 0.5s ease, color 0.5s ease;
+            position: relative;
+            /* 为伪元素绝对定位提供基准 */
+            min-height: 100vh;
+        }
+
+        /* 🌟 背景图魔法层：独立控制背景动画和透明度，绝对不会影响卡片和文字 */
+        body::before {
+            content: '';
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: -1;
+            background-image: var(--bg-img);
+            background-size: var(--bg-size);
+            background-repeat: var(--bg-repeat);
+            background-position: center;
+            opacity: var(--bg-opacity);
+            transition: all 0.6s ease-in-out;
+            pointer-events: none;
+            /* 让鼠标点不中它，防止干扰网页交互 */
+        }
+
+        a {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 30px;
+        }
+
+        header {
+            padding: 30px 0;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-weight: 800;
+            font-size: 20px;
+            letter-spacing: -0.5px;
+        }
+
+        .mode-switcher {
+            display: flex;
+            background: var(--white);
+            padding: 5px;
+            border-radius: var(--border-radius-pill);
+            box-shadow: var(--shadow-soft);
+            gap: 5px;
+            transition: background 0.3s;
+        }
+
+        .mode-btn {
+            padding: 8px 15px;
+            border-radius: var(--border-radius-pill);
+            border: none;
+            background: transparent;
+            font-size: 13px;
+            font-weight: 700;
+            cursor: pointer;
+            color: var(--text-muted);
+            transition: all 0.3s;
+        }
+
+        .mode-btn.active {
+            background: var(--text-dark);
+            color: var(--bg);
+        }
+
+        /* HERO BENTO BOX */
+        #hero {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 25px;
+            padding: 40px 0 80px;
+        }
+
+        .hero-left {
+            background: var(--white);
+            border-radius: var(--border-radius-card);
+            padding: 60px;
+            position: relative;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            box-shadow: var(--shadow-soft);
+            transition: background 0.3s;
+        }
+
+        .hero-right {
+            background: var(--image-bg);
+            border-radius: var(--border-radius-card);
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: var(--shadow-soft);
+            transition: background 0.3s;
+        }
+
+        .hero-right img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .hero-title {
+            font-size: 72px;
+            font-weight: 800;
+            line-height: 1.1;
+            margin-bottom: 25px;
+            letter-spacing: -2px;
+        }
+
+        .hero-intro {
+            color: var(--text-muted);
+            font-size: 20px;
+            max-width: 450px;
+            margin-bottom: 35px;
+            transition: color 0.3s;
+        }
+
+        /* FLOATING UI ELEMENTS */
+        .float-pill {
+            position: absolute;
+            background: var(--white);
+            padding: 10px 20px;
+            border-radius: var(--border-radius-pill);
+            box-shadow: var(--shadow-soft);
+            font-weight: 700;
+            font-size: 13px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            animation: float var(--float-speed) var(--float-easing) infinite;
+            z-index: 10;
+            transition: background 0.3s;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translateY(0);
+            }
+
+            50% {
+                transform: translateY(-12px);
+            }
+        }
+
+        .pill-pink {
+            background: var(--accent-pink);
+            color: #121212;
+        }
+
+        .pill-yellow {
+            background: var(--accent-yellow);
+            color: #121212;
+        }
+
+        .pill-lavender {
+            background: var(--accent-lavender);
+            color: #121212;
+        }
+
+        .mode-dance .pill-pink,
+        .mode-dance .pill-yellow,
+        .mode-dance .pill-lavender {
+            color: #ffffff;
+        }
+
+        /* TABBED COLORED CARDS SYSTEM */
+        .tab-section {
+            padding-bottom: 120px;
+        }
+
+        .tab-nav {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+
+        .tab-btn {
+            background: var(--white);
+            color: var(--text-dark);
+            border: none;
+            padding: 15px 30px;
+            border-radius: var(--border-radius-pill);
+            font-size: 14px;
+            font-weight: 800;
+            cursor: pointer;
+            box-shadow: var(--shadow-soft);
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .tab-btn.active {
+            background: var(--text-dark);
+            color: var(--bg);
+            transform: translateY(-5px) scale(1.05);
+        }
+
+        .tab-container {
+            position: relative;
+            min-height: 650px;
+        }
+
+        .tab-content {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border-radius: var(--border-radius-card);
+            padding: 70px;
+            display: none;
+            opacity: 0;
+            transform: translateY(30px) scale(0.98);
+            transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+            overflow: auto;
+            color: #121212;
+        }
+
+        .mode-dance .tab-content {
+            color: #ffffff;
+        }
+
+        .tab-content.active {
+            display: block;
+            opacity: 1;
+            transform: translateY(0) scale(1);
+        }
+
+        .mode-play .tab-content {
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .tab-content h2 {
+            font-size: 54px;
+            margin-bottom: 25px;
+            letter-spacing: -2px;
+            line-height: 1.1;
+        }
+
+        .tab-yellow {
+            background: var(--accent-yellow);
+        }
+
+        .tab-lavender {
+            background: var(--accent-lavender);
+        }
+
+        .tab-peach {
+            background: var(--accent-peach);
+        }
+
+        .tab-mint {
+            background: var(--accent-mint);
+        }
+
+        .content-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-top: 40px;
+        }
+
+        .item-card {
+            background: var(--card-glass);
+            padding: 30px;
+            border-radius: 30px;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            transition: transform 0.3s ease;
+        }
+
+        .item-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .item-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .item-card h3 {
+            font-size: 22px;
+            margin-bottom: 15px;
+            font-weight: 800;
+        }
+
+        /* CODE BLOCK STYLES */
+        .code-block {
+            font-family: 'Space Mono', monospace;
+            background: rgba(0, 0, 0, 0.08);
+            padding: 15px;
+            border-radius: 15px;
+            font-size: 15px;
+            margin-top: 10px;
+        }
+
+        .mode-dance .code-block {
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        /* DNA TAB SPECIFIC */
+        .dna-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+
+        .dna-col h3 {
+            font-size: 28px;
+            margin-bottom: 20px;
+            border-bottom: 2px solid currentColor;
+            padding-bottom: 10px;
+        }
+
+        .dna-list li {
+            margin-bottom: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            list-style: none;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        /* BUTTONS */
+        .pill-btn {
+            display: inline-block;
+            background: var(--text-dark);
+            color: var(--white);
+            padding: 18px 40px;
+            border-radius: var(--border-radius-pill);
+            font-weight: 800;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .pill-btn:hover {
+            transform: scale(1.03) translateY(-2px);
+            box-shadow: var(--shadow-soft);
+        }
+
+        /* CHATBOT */
+        #chat-trigger {
+            position: fixed;
+            bottom: 40px;
+            right: 40px;
+            width: 70px;
+            height: 70px;
+            background: var(--white);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 30px;
+            box-shadow: var(--shadow-soft);
+            cursor: pointer;
+            z-index: 1000;
+            transition: background 0.3s;
+        }
+
+        .chat-portal {
+            position: fixed;
+            bottom: 125px;
+            right: 40px;
+            width: 400px;
+            height: 600px;
+            background: var(--chat-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border-radius: 35px;
+            box-shadow: 0 30px 100px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+            z-index: 1001;
+            border: 1px solid rgba(255, 255, 255, 0.4);
+            transition: background 0.3s;
+        }
+
+        .mode-dance .chat-portal {
+            border: 1px solid rgba(255, 20, 147, 0.3);
+        }
+
+        .chat-body {
+            flex: 1;
+            padding: 30px;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .msg {
+            max-width: 85%;
+            padding: 14px 22px;
+            border-radius: 25px;
+            font-size: 15px;
+        }
+
+        .msg-user {
+            align-self: flex-end;
+            background: var(--text-dark);
+            color: var(--bg);
+            border-bottom-right-radius: 5px;
+        }
+
+        .msg-twin {
+            align-self: flex-start;
+            background: var(--white);
+            color: var(--text-dark);
+            border-bottom-left-radius: 5px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        @media (max-width: 900px) {
+            #hero {
+                grid-template-columns: 1fr;
+            }
+
+            .hero-left {
+                padding: 40px;
+            }
+
+            .hero-title {
+                font-size: 56px;
+            }
+
+            .dna-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .tab-content {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+
+<body class="mode-core">
+
+    <div class="container">
+        <header>
+            <div class="logo">XYLAB ✨</div>
+            <div class="mode-switcher" id="mode-switcher">
+                <button class="mode-btn active" onclick="setMode('core')">🧘 CORE</button>
+                <button class="mode-btn" onclick="setMode('dance')">💃 DANCE</button>
+                <button class="mode-btn" onclick="setMode('play')">🎈 PLAY</button>
+            </div>
+        </header>
+
+        <section id="hero">
+            <div class="hero-left">
+                <div class="float-pill pill-yellow" style="top: -20px; left: 40px;">✨ AI Builder & Explorer</div>
+                <div class="float-pill pill-lavender" style="bottom: 30px; right: -20px;">🌙 Creator of XYLAB</div>
+                <div class="float-pill pill-pink" style="top: 30%; right: -40px;">💃 K-pop Dancer</div>
+
+                <h1 class="hero-title">Yidan<br>Xia</h1>
+                <p class="hero-intro">
+                    Building AI tools that feel alive. XYLAB is a personal creative AI studio exploring technology with
+                    warmth, emotion, and aesthetic beauty.
+                </p>
+                <div>
+                    <a href="#" class="pill-btn" onclick="toggleChat(); return false;">Boot Digital Twin</a>
+                </div>
+            </div>
+
+            <div class="hero-right">
+                <div class="float-pill"
+                    style="top: 30px; right: 30px; background: var(--white); color: var(--text-dark);">🧘 Solidcore
+                    Addict</div>
+                <img src="./assets/profile-photo.jpg" alt="Yidan Xia">
+            </div>
+        </section>
+
+        <section class="tab-section">
+            <div class="tab-nav">
+                <button class="tab-btn active" onclick="showTab('philosophy')">PHILOSOPHY</button>
+                <button class="tab-btn" onclick="showTab('architecture')">ARCHITECTURE</button>
+                <button class="tab-btn" onclick="showTab('agents')">AGENT ECOSYSTEM</button>
+                <button class="tab-btn" onclick="showTab('dna')" style="border: 2px solid var(--accent-pink);">DNA /
+                    ABOUT</button>
+            </div>
+
+            <div class="tab-container">
+                <div id="tab-philosophy" class="tab-content tab-yellow active">
+                    <h2>Studio<br>Philosophy</h2>
+                    <div class="content-grid">
+                        <div class="item-card full-width">
+                            <h3>THE CORE IDEA</h3>
+                            <p style="font-size: 18px;">Most AI tools focus on capability and efficiency. XYLAB explores
+                                something different. Technology should be powerful — but the tools we interact with
+                                every day should also feel <b>warm, expressive, and beautiful</b>.</p>
+                            <div class="code-block"
+                                style="text-align: center; font-size: 20px; font-weight: 800; padding: 25px;">
+                                Emotion → AI → Interface
+                            </div>
+                        </div>
+                        <div class="item-card full-width">
+                            <h3>LIVING DIGITAL SPACE</h3>
+                            <p style="font-size: 18px;">Interfaces should adapt not only to what you do but also to
+                                <b>how you feel</b>. Less like software. More like a living digital space.
+                            </p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-architecture" class="tab-content tab-lavender">
+                    <h2>System<br>Architecture</h2>
+                    <div class="content-grid">
+                        <div class="item-card">
+                            <h3>THE CREATIVE STACK</h3>
+                            <p style="margin-bottom: 15px;">The XYLAB system is structured as a layered creative stack:
+                            </p>
+                            <ul class="dna-list code-block">
+                                <li>↓ User</li>
+                                <li>↓ Emotion Signal</li>
+                                <li>↓ Emotion Engine</li>
+                                <li>↓ Generative Interface Engine</li>
+                                <li>↓ Personal AI Space</li>
+                                <li>↓ AI Agents</li>
+                            </ul>
+                        </div>
+                        <div class="item-card">
+                            <h3>PARADIGM SHIFT</h3>
+                            <p style="margin-bottom: 15px;">How we rethink software evolution:</p>
+                            <div style="margin-bottom: 20px;">
+                                <span
+                                    style="font-size: 12px; font-weight: 800; letter-spacing: 1px; opacity: 0.8;">TRADITIONAL
+                                    SOFTWARE:</span>
+                                <div class="code-block" style="margin-top: 5px;">Function → Interface</div>
+                            </div>
+                            <div>
+                                <span
+                                    style="font-size: 12px; font-weight: 800; letter-spacing: 1px; opacity: 0.8;">XYLAB
+                                    EXPLORES:</span>
+                                <div class="code-block"
+                                    style="margin-top: 5px; background: rgba(255,255,255,0.8); color: #000;">Emotion →
+                                    AI → Interface</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-agents" class="tab-content tab-peach">
+                    <h2>XYLAB<br>Agent Ecosystem</h2>
+                    <p style="font-size: 18px; margin-bottom: 20px; max-width: 600px;">XYLAB is growing into a personal
+                        AI ecosystem. Each agent plays a role inside a larger creative system.</p>
+                    <div class="content-grid">
+                        <div class="item-card">
+                            <h3>✨ Smart Layout Agent</h3>
+                            <p>AI-powered layout and publishing system. Transforms Markdown to styled HTML for creators
+                                and writers.</p>
+                        </div>
+                        <div class="item-card">
+                            <h3>✈️ Travel Agent</h3>
+                            <p>Personal AI assistant designed for discovering destinations, planning trips, and building
+                                travel itineraries.</p>
+                        </div>
+                        <div class="item-card">
+                            <h3>🎬 Video Agent</h3>
+                            <p>Tools for generating and editing short-form creative video content.</p>
+                        </div>
+                        <div class="item-card">
+                            <h3>👗 Resale Agent</h3>
+                            <p>Intelligent assistant for resale decisions. Helps track product value and optimize resale
+                                opportunities.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div id="tab-dna" class="tab-content tab-mint">
+                    <h2>Biological +<br>Technical DNA</h2>
+                    <div class="dna-grid">
+                        <div class="dna-col">
+                            <h3>LOGIC / Builder</h3>
+                            <ul class="dna-list">
+                                <li><span>🎓</span> M.S. Quant Econ @ SMU</li>
+                                <li><span>🎓</span> B.S. Quant Econ @ Nankai</li>
+                                <li><span>💻</span> Python • PySpark • AWS</li>
+                                <li><span>📈</span> Causal Inference • Databricks</li>
+                            </ul>
+                        </div>
+                        <div class="dna-col">
+                            <h3>EMOTION / Explorer</h3>
+                            <ul class="dna-list">
+                                <li><span>💃</span> K-pop & Hip-hop Dancer</li>
+                                <li><span>🧘</span> Solidcore & Pilates Addict</li>
+                                <li><span>🎨</span> Art & Aesthetic Blogger</li>
+                                <li><span>✈️</span> Solo Traveler (Dubai 2026)</li>
+                                <li><span>💕</span> Zanmang Loopy Fanatic</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <footer style="padding: 60px 0; border-top: 1px solid rgba(0,0,0,0.05); text-align: center;">
+            <p style="font-weight: 800;">© 2026 YIDAN XIA ✨ XYLAB v5.4</p>
+        </footer>
+    </div>
+
+    <div id="chat-trigger" onclick="toggleChat()">🍭</div>
+    <div class="chat-portal" id="chat-window">
+        <div class="chat-header"
+            style="padding: 20px 30px; border-bottom: 1px solid rgba(0,0,0,0.05); display: flex; justify-content: space-between;">
+            <h3>YIDAN.TWIN ✨</h3>
+            <div style="cursor: pointer; font-weight: 800;" onclick="toggleChat()">✕</div>
+        </div>
+        <div class="chat-body" id="chat-body">
+            <div class="msg msg-twin">Hi! I'm Yidan's Digital Twin. 🍬 Want to talk about Quant Econ, K-pop dance, or AI
+                agents?</div>
+        </div>
+        <div class="chat-footer" style="padding: 20px; display: flex; gap: 10px;">
+            <input type="text" id="chat-input" class="chat-input"
+                style="flex:1; padding: 12px 20px; border-radius: 20px; border: 1px solid transparent; background: rgba(0,0,0,0.05); outline: none;"
+                placeholder="Command..." onkeypress="if(event.key === 'Enter') sendMessage()">
+            <button onclick="sendMessage()"
+                style="background: var(--text-dark); color: var(--bg); border: none; padding: 10px 20px; border-radius: 20px; cursor: pointer; font-weight: bold;">Send</button>
+        </div>
+    </div>
+
+    <script>
+        // MODE SYSTEM
+        function setMode(mode) {
+            document.body.className = 'mode-' + mode;
+            document.querySelectorAll('.mode-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+
+        // TAB LOGIC
+        function showTab(tabId) {
+            document.querySelectorAll('.tab-btn').forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            document.querySelectorAll('.tab-content').forEach(content => {
+                content.classList.remove('active');
+                setTimeout(() => { if (!content.classList.contains('active')) content.style.display = 'none'; }, 500);
+            });
+
+            const nextTab = document.getElementById('tab-' + tabId);
+            nextTab.style.display = 'block';
+            setTimeout(() => nextTab.classList.add('active'), 10);
+        }
+
+        // CHAT LOGIC
         const chatWindow = document.getElementById('chat-window');
         const chatBody = document.getElementById('chat-body');
         const chatInput = document.getElementById('chat-input');
-        const chatSend = document.getElementById('chat-send');
         const sessionId = Math.random().toString(36).substring(7);
 
         function toggleChat() {
-            if (!chatWindow) return;
             const isHidden = window.getComputedStyle(chatWindow).display === 'none';
             chatWindow.style.display = isHidden ? 'flex' : 'none';
             if (isHidden) chatInput.focus();
         }
 
-        function appendMessage(text, className) {
-            const msg = document.createElement('div');
-            msg.className = `msg ${className}`;
-            msg.innerText = text;
-            chatBody.appendChild(msg);
-            chatBody.scrollTop = chatBody.scrollHeight;
-            return msg;
-        }
-
         async function sendMessage() {
             const text = chatInput.value.trim();
             if (!text) return;
+            const uMsg = document.createElement('div'); uMsg.className = 'msg msg-user'; uMsg.innerText = text;
+            chatBody.appendChild(uMsg); chatInput.value = ''; chatBody.scrollTop = chatBody.scrollHeight;
 
-            // Append User Message
-            appendMessage(text, 'msg-user');
-            chatInput.value = '';
-            
-            // Loading State
             chatInput.disabled = true;
-            chatSend.disabled = true;
-            const loading = document.createElement('div');
-            loading.className = 'msg msg-ai loading-bubble';
-            loading.innerHTML = '<div class="dot"></div><div class="dot"></div><div class="dot"></div>';
-            chatBody.appendChild(loading);
-            chatBody.scrollTop = chatBody.scrollHeight;
+            const loading = document.createElement('div'); loading.className = 'msg msg-twin'; loading.innerText = 'typing...';
+            chatBody.appendChild(loading); chatBody.scrollTop = chatBody.scrollHeight;
 
             try {
                 // 🔴 TODO: Replace this URL with your actual Render domain!
@@ -393,23 +788,19 @@
                     headers: { 'Content-Type': 'application/json' },
                     body: JSON.stringify({ message: text, session_id: sessionId })
                 });
-
-                if (!response.ok) throw new Error('Server issues');
-
                 const data = await response.json();
                 chatBody.removeChild(loading);
-                appendMessage(data.reply, 'msg-ai');
+                const tMsg = document.createElement('div'); tMsg.className = 'msg msg-twin'; tMsg.innerText = data.reply;
+                chatBody.appendChild(tMsg);
             } catch (error) {
-                console.error('Chat Error:', error);
                 chatBody.removeChild(loading);
-                const errorMsg = appendMessage("Oops! My backend seems to be taking a coffee break. Please make sure the FastAPI server is running localy.", 'msg-ai');
-                errorMsg.classList.add('error');
+                const err = document.createElement('div'); err.className = 'msg msg-twin'; err.style.background = '#ffcccc'; err.style.color = '#121212'; err.innerText = "Connection Error.";
+                chatBody.appendChild(err);
             } finally {
-                chatInput.disabled = false;
-                chatSend.disabled = false;
-                chatInput.focus();
+                chatInput.disabled = false; chatInput.focus(); chatBody.scrollTop = chatBody.scrollHeight;
             }
         }
     </script>
-  </body>
+</body>
+
 </html>

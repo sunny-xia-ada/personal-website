@@ -21,7 +21,7 @@ origins = [
     "http://127.0.0.1",
     "http://127.0.0.1:8000",
     "null", # Allows file:// origins for local testing
-    "*"
+    "*"     # Required for requests coming from your GitHub Pages domain
 ]
 
 app.add_middleware(
@@ -118,5 +118,8 @@ async def chat(request: ChatRequest):
 
 if __name__ == "__main__":
     import uvicorn
-    # Using 127.0.0.1 explicitly can help with some local DNS issues
-    uvicorn.run(app, host="127.0.0.1", port=8000)
+    # 🌟 CRITICAL CHANGE FOR RENDER: 
+    # Read the PORT assigned by Render, default to 8000 for local testing.
+    # Bind host to 0.0.0.0 to expose the API to the public web.
+    port = int(os.environ.get("PORT", 8000))
+    uvicorn.run(app, host="0.0.0.0", port=port)
